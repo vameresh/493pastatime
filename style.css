@@ -14,12 +14,21 @@ input:focus{
 
 .container{
     position: absolute;
-    left: 100px;
-    top: 100px;
+    left: 50%;
+    margin-left: -100px;
+    top: 10%;
+}
+
+#time-form{
+    font-size: 28px;
+    width:0px;
+}
+
+#begin{
+    padding-right: 2px;
 }
 
 .timer-input{
-    border: 1px green solid;
     width: 201px;
     padding: 0px 10px;
 }
@@ -27,9 +36,12 @@ input:focus{
 .timer-input input{
     color:white;
     font-size: 28px;
-    border: none;
+    border: 1px none;
     background: none;
-    width: 32px;
+    width: 31px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    margin-right: 2px;
     float:left;
     font-weight: bold;
 }
@@ -71,6 +83,27 @@ input:focus{
     z-index: 2;
 }
 
+h1{
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    margin-left: -100px;
+    color: white;
+    font-size: 40px;
+}
+
+p{
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    margin-left: -130px;
+}
+
+a{
+    color: white;
+    font-size: 14px;
+}
+
 h3{
     position: absolute;
     left: 45px;
@@ -87,5 +120,49 @@ h4{
     float: left;
     font-size: 20px;
     padding-top: 8px;
+}
+
+.button-group{
+    position: absolute;
+    left: 50%;
+    margin-left:-60px;
+    top: 65%;
+}
+
+
+.start-button:hover{
+    background-color: #ff6f6f;
+}
+
+.games-button:hover{
+    background-color: #ff8324;
+}
+
+
+.start-button{
+    width: 120px;
+    border: 2px black solid;
+    background: none;
+    padding: 10px;
+    border-radius: 50px;
+    font-weight: bold;
+    color: white;
+    background-color: #ff5656;
+    cursor:pointer;
+    outline: none;
+}
+
+
+.games-button{
+    width: 120px;
+    border: 2px black solid;
+    background: none;
+    padding: 10px;
+    border-radius: 50px;
+    font-weight: bold;
+    color: white;
+    background-color: #ff6f00;
+    outline: none;
+    cursor:pointer
 }
 
