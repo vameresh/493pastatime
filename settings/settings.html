@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="settings.js"></script>
+    <link rel="stylesheet" href="settings.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <title> PastaTime </title>
+</head>
+
+<body>
+    <div id="open-panel-btn" class="settings-header" style="display:none">
+        <div class="row">
+            <div class="col-sm-3">       
+                <img class="settings-icon" id="settings-open-btn" src="settings-images/settings-outline-24px.svg" />
+            </div>
+        </div> 
+    </div>
+    <div class="settings-panel">
+        <div id="settings">
+            <div class="settings-header">
+                <div class="row">
+                    <div class="col-sm-3">       
+                        <img id="close-settings-btn" class="settings-icon" src="settings-images/settings-outline-24px.svg" />
+                    </div>
+                    <div class="col-sm-3" style="margin-top: 10px">       
+                        <h1><b>Settings</b></h1>
+                    </div>
+                </div> 
+            </div>
+            <div class="time-label">
+                <label>Work:</label>
+                <input type="text" class="time-input" /> min
+                <br>
+                <div class="subscript">Max: 120 Min: 15</div>
+            </div>
+            <div class="time-label">
+                <label>Break:</label>
+                <input type="text" class="time-input" /> min
+                <br>
+                <div class="subscript">Max: 30 Min: 2</div>
+            </div>
+            <div class="time-label">
+                <label>Game Selection:</label>
+                <br>
+                <div class="game-selection">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="subscript">Infinite Runner</div>
+                            <div class="game-thumbnail" id="game1">
+                                <img class="game-pic" src="settings-images/infinite-runner.png" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="subscript">TowerBloxx</div>
+                            <div class="game-thumbnail" id="game2">
+                                <img class="game-pic" src="settings-images/towerbloxx.png" />
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="subscript">128</div>
+                            <div class="game-thumbnail" id="game3">
+                                <img class="game-pic" src="settings-images/128.png" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="subscript">Space Invaders</div>
+                            <div class="game-thumbnail" id="game4">
+                                <img class="game-pic" src="settings-images/space-invaders.png" />
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="time-label">
+                <div class="row">
+                    <div class="col-sm-5">
+                    <label>Shuffle:</label>
+                        
+                    </div>
+                    <div class="col-sm-4">
+                        <i id="shuffle" class="material-icons shuffle-btn" style="font-size: 60px">toggle_off</i>
+
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</body>
+<!--
+<script>
+    Vue.component('timeSet', {
+        props: ['label', 'max', 'min'],
+        template: '{{ label }}: <input type="text" class="time-input" /> min \
+                    <br><div class="subscript">Max: {{ max }} Min: {{ min }}</div>'
+    })
+
+    let app = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        methods: {
+
+        }
+
+    })
+</script>
+-->
+
+</html>

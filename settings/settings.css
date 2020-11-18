@@ -1,0 +1,85 @@
+body {
+    background-color: rgb(253, 125, 125);
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.time-input {
+    width: 50px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgb(253, 125, 125);
+    font-size: 30px;
+    padding: 7px;
+}
+
+#settings {
+    color: white;
+    font-size: 30px;
+    height: 100%;
+}
+
+.subscript {
+    margin-top: 5px;
+    margin-left: 25px;
+    font-size: 15px;
+}
+
+.time-label {
+    margin-bottom: 40px;
+    margin-top: 40px;
+    margin-left: 15%;
+    font-size: 40px;
+}
+
+.game-selection {
+    background-color: rgb(253, 125, 125);
+    width: 90%;
+}
+
+.settings-panel {
+    width: 474px;
+    height: 100%;
+    background-color: rgb(224, 102, 102);
+    border-radius: 0 40px 40px 0;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+
+.game-thumbnail {
+    height: 100px;
+    width: 125px;
+    border-radius: 10px;
+    margin: 20px;
+    margin-top: 5px;
+    border: 1px solid black;
+}
+
+.game-pic {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.settings-icon {
+    height:55px;
+    width:55px;
+    margin-top: 20px;
+    margin-left: 20px;
+    position: absolute;
+    z-index: 0;
+}
+
+.shuffle-btn {
+    background-color: rgb(224, 102, 102);
+    color: rgb(253, 125, 125);
+}
+
+
