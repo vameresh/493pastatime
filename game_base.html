@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PastaTime Game page</title>
+        <link rel="stylesheet" href = "game.css" />
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>        
+    </head>
+    <body>
+        <div id = "tomatoTimer" class = "container">
+            <div class = "controls">
+                <input type="image" src="play.svg" @click="start" v-if="!running"/>
+                <input type="image" src="pause.svg" @click="pause" v-if="running"/>
+                <input type="image" src="stop.svg" @click="stop"/>
+            </div>
+            <h3> {{ time | clockify }} </h3>
+            <timer-graphic v-bind:time = "time" v-bind:set_time = "set_time"> </timer-graphic>
+
+        </div>
+        <div class="select_games">            
+            <a href="infinite_runner.html">
+                <img src="pacman.PNG" alt="pacman">
+            </a>
+            <a href="space_invaders.html">
+                <img src="space-invaders.png" alt="space-invaders">
+            </a>
+            <a href="game_2048.html">
+                <img src="128.png" alt="2048 game">
+            </a>
+            <a href="tetris.html">
+                <img src="tetris.png" alt="2048 game">
+            </a>
+        </div>
+
+        <script src="game.js"></script>
+        <script src="tomatoTimer.js"></script>
+    </body>
+</html>

@@ -1,0 +1,83 @@
+body{
+    background-color:  #FF9191;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.select_games, #games{
+    display: block;
+    position: relative;
+}
+
+input{
+    height: 90px;
+    display: inline-block;
+}
+
+input:focus{
+    outline: none;
+}
+
+.controls{
+    display: inline-block;
+    position: absolute;
+    right: 180px;
+    padding-top: 20px;
+}
+
+.container{
+    position: relative;
+    display: block;
+}
+
+.timer-container{
+    height: 115px;
+    width: 130px;
+    display: inline-block;
+    right: 10px;
+}
+
+.tomato{
+    height: 115px;
+    width: 130px;
+    display: inline-block;
+    position: absolute;
+    background-size: 200px;
+    background-repeat: no-repeat;
+    background-origin: padding-box;
+    right: 10px;
+
+}
+
+#outline{
+    /* background-image: url("tomatoOutline.svg"); */
+    height: 115px;
+    width: 130px;
+    position: absolute;
+    z-index: 3;
+    right: 10px;
+}
+
+#fill{
+    /* background-image: url("tomatoFill.svg"); */
+    height: 115px;
+    width: 130px;
+    position: absolute;
+    z-index: 1;
+}
+
+.cover{
+    height: 0px;
+    background-color: #FF9191;
+    z-index: 2;
+    position: absolute;
+}
+
+h3{
+    position: absolute;
+    right: 0px;
+    top: 40px;
+    color: white;
+    z-index: 4;
+    width: 115px;
+}
+

@@ -42,9 +42,13 @@ let timerSet = {
 let timerGraphic = {
     template: `
     <div class= "timer-container">
-        <div class = "tomato outline" />
+        <div>
+            <img id="outline" src="tomatoOutline.svg" alt="tomato outline" />
+        </div>
         <div class = "tomato cover" v-bind:style="{ height: increment }" />
-        <div class = "tomato fill"" />
+        <div class = "tomato">
+            <img id="fill" src="tomatoFill.svg" alt="tomato fill" />
+        </div>
     </div>
     `,
     props:['time', 'set_time'],
@@ -52,7 +56,7 @@ let timerGraphic = {
         increment () {
             let mult = 1 - this.time / this.set_time
             console.log(mult);
-            return mult * 175 + 'px'
+            return mult * 115 + 'px'
         }
     }
 }
@@ -78,7 +82,7 @@ let tomatoTimer = new Vue({
                if(seconds < 10){
                    seconds = "0" + seconds;
                }
-               return hours + "H " + minutes + "M " + seconds + "S";
+               return hours + ":" + minutes + ":" + seconds;
         }
     },
     data:{
