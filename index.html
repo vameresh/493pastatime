@@ -4,37 +4,23 @@
         <link rel="stylesheet" href = "style.css" />
         <!-- development version, includes helpful console warnings -->
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <meta name="viewport" content="width=1280px, initial-scale=1.0">
-        
+        <title>PastaTime</title>        
     </head>
     <body>
-    <div id = "app">
+        <div id="app">
 
-        <div class = "tomato container">
-            <h3> {{ time | clockify }} </h3>
-            <timer-graphic v-bind:time = "time" v-bind:set_time = "set_time"> </timer-graphic>
-            <div class = "controls">
-                <input type="image" src="play.svg" @click="start" v-if="!running"/>
-                <input type="image" src="pause.svg" @click="pause" v-if="running"/>
-                <input type="image" src="stop.svg" @click="stop"/>
-            </div>
-        </div>
-
-        <h1>PastaTime</h1>
-
-        <p><a href="#">What is PastaTime and how does it work?</a></p>
-
-        <div class = "button-group">
-            <button class = "games-button">Select Games!</button>
-            <br>
-            <br>
-            <button class = "start-button">Start!</button>
-        </div>
+            <tomato-setup class = "tomato-input" is_work=true;></tomato-setup>
+            <tomato-timer size="med" is_work=true></tomato-timer>
+            </br>
+            </br>
+            </br>
+            </br>
+            <tomato-setup class = "tomato-input" is_work=false;></tomato-setup>
+            <tomato-timer size="small" is_work=false></tomato-timer>
+            <h1>PastaTime</h1>
+            <p>What is PastaTime and how does it work?</p>
         
-        <timer-set @set-time="set"></timer-set>
-
-        
-    </div>
-        <script src="tomatoTimer.js"></script>
+        </div>
+        <script src="script.js"></script>
     </body>
 </html>

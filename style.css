@@ -3,166 +3,128 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-input:focus{
-    outline:none;
+
+.large{
+    width: 400px;
+    height: 400px;
+    position: relative
 }
 
-.controls{
-    width: 55px;
-    margin: 0px auto;
-}
-
-.container{
-    position: absolute;
-    left: 50%;
-    margin-left: -100px;
-    top: 10%;
-}
-
-#time-form{
-    font-size: 28px;
-    width:0px;
-}
-
-#begin{
-    padding-right: 2px;
-}
-
-.timer-input{
-    width: 201px;
-    padding: 0px 10px;
-}
-
-.timer-input input{
-    color:white;
-    font-size: 28px;
-    border: 1px none;
-    background: none;
-    width: 31px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    margin-right: 2px;
-    float:left;
-    font-weight: bold;
-}
-
-.timer-input input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-.timer-container{
-    height: 176px;
+.med{
+    width: 300px;
+    height: 313px;
     position: relative;
 }
 
-.tomato{
-    height: 176px;
-    width: 200px;
-    position: absolute;
-    background-size: 200px;
-    background-repeat: no-repeat;
-    background-origin: padding-box;
-
+.small{
+    width: 50px;
+    height: 44px;
+    position: relative;
 }
 
-.outline{
-    background-image: url("tomatoOutline.svg");
-    z-index: 3;
+.wide{
+    width: 290px;
+    height: 44px;
+    position: relative;
+    display: inline-block;
 }
 
 .fill{
-    background-image: url("tomatoFill.svg");
-    z-index: 1;
+    position: absolute;
+    z-index: -3;
+    display: inline;
 }
-
 
 .cover{
-    height: 0px;
+    position: absolute;
+    z-index: -3;
+    display: inline;
     background-color: #FF9191;
-    z-index: 2;
+    height: 0%;
 }
 
-h1{
+.outline{
     position: absolute;
-    left: 50%;
-    top: 45%;
-    margin-left: -100px;
+    z-index: -1;
+    display: inline;
+}
+
+.countdown-mid{
+    position:absolute;
+    font-size: 25px;
     color: white;
-    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 45%;
+    width: 100%;
+    height: 100%;
 }
 
-p{
-    position: absolute;
-    left: 50%;
-    top: 55%;
-    margin-left: -130px;
-}
-
-a{
+.countdown-left{
+    font-size: 25px;
     color: white;
-    font-size: 14px;
-}
-
-h3{
-    position: absolute;
-    left: 45px;
-    top: 75px;
-    color: white;
-    z-index: 4;
-    width: 115px;
-}
-
-h4{
-    color: white;
-    margin:0px;
-    padding-right: 10px;
-    float: left;
-    font-size: 20px;
-    padding-top: 8px;
-}
-
-.button-group{
-    position: absolute;
-    left: 50%;
-    margin-left:-60px;
-    top: 65%;
-}
-
-
-.start-button:hover{
-    background-color: #ff6f6f;
-}
-
-.games-button:hover{
-    background-color: #ff8324;
-}
-
-
-.start-button{
-    width: 120px;
-    border: 2px black solid;
-    background: none;
+    font-weight: bold;
+    display: inline;
+    text-align: center;
+    width: 100%;
+    height: 100%;
     padding: 10px;
-    border-radius: 50px;
+    top: 200px;
+}
+
+.buttons-bottom{
+    position: absolute;
+    bottom:0px;
+    height: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.buttons-right{
+    float:right;
+}
+
+.hidden-input{
+    position: relative;
+    width: 3px;
+    background: none;
+    border: none;
+    outline:none;
+    margin-left: -6px;
+    display: inline;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0);
+    caret-color: white;
+    padding-left: 3px;
+    bottom: 1px;
+}
+
+.tomato-input{
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    width: fit-content;
+    background-color: #d47777;
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+
+.tomato-input:focus-within{
+    border: 2px solid black;
+}
+
+.timer-input{
+    font-size: 24px;
     font-weight: bold;
     color: white;
-    background-color: #ff5656;
-    cursor:pointer;
+    display: inline;
+}
+
+
+input:focus{
     outline: none;
 }
 
-
-.games-button{
-    width: 120px;
-    border: 2px black solid;
-    background: none;
-    padding: 10px;
-    border-radius: 50px;
-    font-weight: bold;
-    color: white;
-    background-color: #ff6f00;
-    outline: none;
-    cursor:pointer
-}
-
+.hidden-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
