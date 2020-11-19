@@ -166,3 +166,7 @@ h4{
     cursor:pointer
 }
 
+#games-list {
+    display: none;
+}
+
