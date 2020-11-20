@@ -252,18 +252,28 @@ var app = new Vue({
 });
 
 
-$("#settings-icon").click(function(){
-if(settings_open){
+function closeSettings(){
     settings_open = false;
     $("#settings-panel").animate({left: '-410px'}, 500);
     $("#settings-icon").animate({left: '0px'}, 500);
     $("#settings-icon").css('transform', 'rotate(0deg)')
 }
-else{
+
+function openSettings(){
     settings_open = true;
     $("#settings-panel").animate({left: '0px'}, 500);
     $("#settings-icon").animate({left: '400px'}, 500);
     $("#settings-icon").css('transform', 'rotate(180deg)')
+}
+
+$("#settings-done-btn").click(closeSettings);
+
+$("#settings-icon").click(function(){
+if(settings_open){
+    closeSettings();
+}
+else{
+    openSettings()
 }
 
 });
@@ -272,10 +282,7 @@ $(document).mousedown(function(e)
 {
     if (!$("#settings-panel").is(e.target) && $("#settings-panel").has(e.target).length === 0) {
         if(settings_open){
-            settings_open = false;
-            $("#settings-panel").animate({left: '-410px'}, 500);
-            $("#settings-icon").animate({left: '0px'}, 500);
-            $("#settings-icon").css('transform', 'rotate(0deg)')
+            closeSettings();
         }
     }
 });
