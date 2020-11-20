@@ -281,8 +281,10 @@ else{
 $(document).mousedown(function(e) 
 {
     if (!$("#settings-panel").is(e.target) && $("#settings-panel").has(e.target).length === 0) {
-        if(settings_open){
-            closeSettings();
+        if (!$("#settings-icon").is(e.target) && $("#settings-icon").has(e.target).length === 0) {
+            if(settings_open){
+                closeSettings();
+            }
         }
     }
 });
