@@ -8,6 +8,40 @@ h1{
     text-align: center;
 }
 
+label{
+    color:white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.settings-icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    margin-top: 15px;
+    width: 50px;
+    z-index: 3;
+    transition: transform .5s ease-in-out;
+    transform: rotate(0deg)
+}
+
+.settings-panel{
+    position: absolute;
+    justify-content: center;
+    z-index: 3;
+    top: 0px;
+    left: -410px;
+    margin: 10px;
+    margin-top: 15px;
+    padding: 20px;
+    width: 400px;
+    height: 95vh;
+    background-color: #e06666;
+    border-radius: 20px;
+}
+
 p{
     color:white;
     text-align: center;
@@ -69,8 +103,17 @@ a{
     margin-left: -150px;
 }
 
+.top-left{
+    position: absolute;
+    left: 100%;
+    width: 350px;
+    margin: 20px;
+    margin-left: -370px;
+}
+
 .logo{
     width: 300px;
+    margin-top: 10px;
 }
 
 .large{
@@ -92,7 +135,7 @@ a{
 }
 
 .wide{
-    width: 290px;
+    width: 350px;
     height: 44px;
     position: relative;
     display: inline-block;
@@ -150,7 +193,7 @@ a{
 }
 
 .buttons-right{
-    float:right;
+    margin-left: 40px;
 }
 
 .hidden-input{
@@ -169,19 +212,21 @@ a{
 }
 
 .tomato-input{
-    padding: 5px;
-    margin: 5px;
-    border-radius: 10px;
+    margin: 10px;
     width: fit-content;
-    background-color: #d47777;
-    border: 2px solid rgba(0, 0, 0, 0);
+    
+    max-height: 50px;
 }
 
-.tomato-input:focus-within{
+.tomato-input:focus-within > .timer-input{
     border: 2px solid black;
 }
 
 .timer-input{
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #FF9191;
+    border: 2px black;
     font-size: 24px;
     font-weight: bold;
     color: white;

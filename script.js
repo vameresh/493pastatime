@@ -1,12 +1,9 @@
-var settings = {
-    break:300,
-    work: 1500,
-    selected_games: []
-}
+var settings_open = false;
 
 let tomatoSetup = {
     template:`
     <div>
+        <label>{{label}}:</label>
         <div @click = "redirect" class= "timer-input">
             {{hours | digitify }}H {{minutes | digitify }}M {{seconds | digitify}}S
         </div>
@@ -16,16 +13,15 @@ let tomatoSetup = {
     props: ["type"],
     data: function(){
         return{
-            seconds: null,
-            minutes: null,
-            hours: null,
+            seconds: 0,
+            minutes: 0,
+            hours: 0,
             input:null,
-            settings
+            label: null,
         }
     },
     methods: {
         redirect(){
-            console.log(this.$refs);
             this.$refs.input.focus();
         },
         update(){
@@ -52,22 +48,48 @@ let tomatoSetup = {
                 this.minutes = 0;
                 this.seconds = 0;
             }
+            this.commit();
         },
         commit(){
             let time = this.hours * 3600 + this.minutes * 60 + this.seconds * 1;
-            console.log(this.type);
             if(this.type === "work"){
-                console.log("updated work");
-                this.settings.work = time;
+                localStorage.setItem("work-time", time);
             }
             if(this.type === "break"){
-                console.log("updated break");
-                this.settings.break = time;
+                localStorage.setItem("break-time", time);
             }
+            
         }
     },
     created(){
-        console.log(this.type);
+        this.label = (this.type === "work") ? "Work Time" : "Break Time";
+
+        if(this.type === "work"){
+            if (localStorage.getItem("work-time") !== null) {
+                let time = localStorage.getItem('work-time');
+                let hours = parseInt(time / 3600);
+                let minutes = parseInt((time % 3600) / 60);
+                let seconds = parseInt(time % 3600 % 60)
+                this.hours = hours;
+                this.minutes = minutes;
+                this.seconds = seconds;
+                return;
+            }
+        }
+
+        if(this.type === "break"){
+            if (localStorage.getItem("break-time") !== null) {
+                let time = localStorage.getItem('break-time');
+                let hours = parseInt(time / 3600);
+                let minutes = parseInt((time % 3600) / 60);
+                let seconds = parseInt(time % 3600 % 60)
+                this.hours = hours;
+                this.minutes = minutes;
+                this.seconds = seconds;
+                return;
+            }
+        }
+        this.minutes = (this.type == "work") ? 25 : 5;
     },
     filters: {
         digitify(input){
@@ -91,19 +113,21 @@ let tomatoTimer = {
             <div :class="size" class = "cover" v-bind:style="{ height: increment }" />
             <img :class="size" class="outline"  src="images/tomatoOutline.svg" />   
             <div :class="buttonLoc">
+                <input type="image" src="images/home.svg" @click="home" />
                 <input type="image" src="images/play.svg" v-if="!is_running" @click="start" />
                 <input type="image" src="images/pause.svg" v-if="is_running"  @click="pause" />
                 <input type="image" src="images/restart.svg" @click="restart" />
+                <input type="image" src="images/skip.svg" @click="skip" />
             </div>
         </div>
     `,
-    props:["size", "is_work"],
+    props:["size", "type"],
     data: function(){
         return {
             is_running: false,
             timer: null,
-            settings,
             time: 0,
+            set_time: 0
         }
     },
     computed:{
@@ -117,19 +141,34 @@ let tomatoTimer = {
             return (this.size == "small") ?  "wide" : this.size;
         },
         increment(){
-            let set_time = this.is_work ? this.settings.work : this.settings.break;
-            let percent = 1- this.time / set_time;
+            let percent = 1- this.time / this.set_time;
             return percent * 100 + '%';
         }
     },
     created() {
-        this.time = this.is_work ? this.settings.work : this.settings.break;
+        if(this.type === "work"){
+            if (localStorage.getItem("work-time") !== null){
+                this.set_time = localStorage.getItem('work-time');
+            }
+            else{
+                this.set_time = 1500;
+            }
+        }
+
+        if(this.type === "break"){
+            if (localStorage.getItem("break-time") !== null){
+                this.set_time = localStorage.getItem('break-time');
+            }
+            else{
+                this.set_time = 300;
+            }
+        }
+        this.time = this.set_time;
         this.start();
     },
     methods: {
         start(){
             this.is_running = true;
-            // check settings hasn't updated    
 
             this.timer = setInterval(()=>{
                 if(this.time > 0){
@@ -137,6 +176,7 @@ let tomatoTimer = {
                 }
                 else{
                     this.restart();
+                    this.done();
                 }
             },1000)
         },
@@ -147,7 +187,40 @@ let tomatoTimer = {
         restart(){
             this.pause();
             this.timer = null;
-            this.time = this.is_work ? this.settings.work : this.settings.break;
+            if(this.type === "work"){
+                if (localStorage.getItem("work-time") !== null){
+                    this.set_time = localStorage.getItem('work-time');
+                }
+                else{
+                    this.set_time = 1500;
+                }
+            }
+    
+            if(this.type === "break"){
+                if (localStorage.getItem("break-time") !== null){
+                    this.set_time = localStorage.getItem('break-time');
+                }
+                else{
+                    this.set_time = 300;
+                }
+            }
+            this.time = this.set_time;
+        },
+        skip(){
+            this.restart();
+            if(this.type === "work"){
+                window.location.href = "game.html";
+            }
+            if(this.type === "break"){
+                window.location.href = "work.html";
+            }
+        },
+        done(){
+            this.restart();
+        },
+        home(){
+            this.restart();
+            window.location.href = "index.html";
         }
     },
     filters: {
@@ -175,5 +248,34 @@ var app = new Vue({
     components: {
         "tomato-timer": tomatoTimer,
         "tomato-setup": tomatoSetup
+    }
+});
+
+
+$("#settings-icon").click(function(){
+if(settings_open){
+    settings_open = false;
+    $("#settings-panel").animate({left: '-410px'}, 500);
+    $("#settings-icon").animate({left: '0px'}, 500);
+    $("#settings-icon").css('transform', 'rotate(0deg)')
+}
+else{
+    settings_open = true;
+    $("#settings-panel").animate({left: '0px'}, 500);
+    $("#settings-icon").animate({left: '400px'}, 500);
+    $("#settings-icon").css('transform', 'rotate(180deg)')
+}
+
+});
+
+$(document).mousedown(function(e) 
+{
+    if (!$("#settings-panel").is(e.target) && $("#settings-panel").has(e.target).length === 0) {
+        if(settings_open){
+            settings_open = false;
+            $("#settings-panel").animate({left: '-410px'}, 500);
+            $("#settings-icon").animate({left: '0px'}, 500);
+            $("#settings-icon").css('transform', 'rotate(0deg)')
+        }
     }
 });

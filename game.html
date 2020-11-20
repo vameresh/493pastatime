@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- development version, includes helpful console warnings -->
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -17,19 +16,12 @@
                 <tomato-setup class = "tomato-input" type="break"></tomato-setup>
             </div>
             <input type="image" src="images/settings.svg" class = "settings-icon" id = "settings-icon"></button>
-                
-            <div class = "center">
-                <img class= "logo" src="images/tomatoLogo.svg" />
-                <h1>PastaTime</h1>
-                <a href="#"><p>What is PastaTime and how does it work?</p></a>
-                <div class="button-container">
-                    <button class = "select-game main-button">Select Game!</button>
-                    </br>
-                    <a href="work.html"><button class = "start main-button">Start!</button></a>
-                </div>
-            </div>
-        </div>
+
+            <tomato-timer class = "top-left" size="small" type="break"></tomato-timer>
+
+
         
+        </div>
         <script src="script.js"></script>
     </body>
 </html>
