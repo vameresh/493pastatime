@@ -122,8 +122,6 @@ a:hover{
     box-shadow: 0 3px;
 }
 
-
-
 .center{
     position: absolute;
     left: 50%;
@@ -302,4 +300,34 @@ footer {
     padding: 10px;
     background-color: tomato;
     color: black;
+}
+
+.row{
+    margin-bottom: 20px;
+}
+
+.col-sm-3{
+    width: 130px;
+}
+
+.game-thumbnail{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border: 3px black solid;
+    background-color:black;
+    border-radius: 25px;
+    box-shadow: 0 7px black;
+}
+
+
+
+.game-grid{
+    position:relative;
+    left:0px;
+    margin-bottom: 50px;
+    margin-left: -190px;
+    width: 520px;
+    height: 260px;
+    padding: 10px;
 }

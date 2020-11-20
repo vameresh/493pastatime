@@ -1,5 +1,65 @@
 var settings_open = false;
 
+
+var games_list= [
+    {
+        "name": "Snake",
+        "image": "images/games/snake.png",
+        "src" : "#",
+        "selected": false,
+        "played": false,
+    },
+    {
+        "name": "Asteroid",
+        "image": "images/games/asteroid.png",
+        "src": "#",
+        "selected": false,
+        "played": false,
+    },
+    {
+        "name": "Frogger",
+        "image": "images/games/frogger.png",
+        "src": "#",
+        "selected": false,
+        "played": false,
+    },
+    {
+        "name": "Youtube",
+        "image": "images/games/youtube.png",
+        "src": "https://www.youtube.com/",
+        "selected": false,
+        "played": false,
+    },
+    {
+        "name": "Netflix",
+        "image": "images/games/netflix.png",
+        "src": "https://www.netflix.com/",
+        "selected": false,
+        "played": false,
+    },
+    {
+        "name": "Hulu",
+        "image": "images/games/hulu.png",
+        "src": "https://www.hulu.com/",
+        "selected": false,
+        "played": false,
+    },
+    {
+        "name": "Custom",
+        "image": "images/games/custom.png",
+        "src": "#",
+        "selected": false,
+        "played": false,
+    },
+    {
+        "name": "None",
+        "image":  "images/games/none.png",
+        "src": "#",
+        "selected": false,
+        "played": false,
+    }
+];
+
 let tomatoSetup = {
     template:`
     <div>
@@ -103,7 +163,6 @@ let tomatoSetup = {
         }
     }
 }
-
 
 let tomatoTimer = {
     template: `
@@ -243,11 +302,40 @@ let tomatoTimer = {
     }
 }
 
+let gameFrame = {
+    template: ``
+}
+
+let gameSelect = {
+    template: `
+    <div id="game-grid" class="game-grid">
+        <div class="row" v-for="i in Math.ceil(games.length / 4)">
+            <div class="col-sm-3" v-for="game in games.slice((i - 1) * 4, i * 4)">
+            <p>{{game.name}}</p>
+            <img v-bind:id="game.name" class= "game-thumbnail" :src=game.image />
+            </div>
+        </div>
+    </div>`,
+    props:["display"],
+    methods:{
+    },
+    created(){
+        this.games = JSON.parse(localStorage.getItem("games"));
+    },
+    data: function(){
+        return {
+            games: null
+        }
+    }
+}
+
 var app = new Vue({
     el:"#app",
     components: {
         "tomato-timer": tomatoTimer,
-        "tomato-setup": tomatoSetup
+        "tomato-setup": tomatoSetup,
+        "game-select": gameSelect,
+        "game-frame": gameFrame,
     }
 });
 
@@ -266,25 +354,89 @@ function openSettings(){
     $("#settings-icon").css('transform', 'rotate(180deg)')
 }
 
-$("#settings-done-btn").click(closeSettings);
-
-$("#settings-icon").click(function(){
-if(settings_open){
-    closeSettings();
+function selectGame(name){
+    console.log("select game");
+    let id = "#" + name;
+    let games = JSON.parse(localStorage.getItem("games"));
+    const game = games.filter((game) => { return game.name === name; });
+    game[0].selected=true;
+    $(id).css({
+        "transform": "translateY(4px)",
+        "box-shadow": "0 3px black",
+    });
+    if(name==="None"){
+        games.forEach(game => {
+            if(game.name !== "None"){
+                console.log("deselecting" + game.name);
+                deselectGame(game.name);
+            }
+        });
+    }else{
+        deselectGame("None")
+    }
+    localStorage.setItem("games", JSON.stringify(games));
 }
-else{
-    openSettings()
+
+function deselectGame(name){
+    console.log("deselect game");
+    let id = "#" + name;
+    let games = JSON.parse(localStorage.getItem("games"));
+    const game = games.filter((game) => { return game.name === name; });
+    game[0].selected=false;
+    $(id).css({
+        "transform": "translateY(0px)",
+        "box-shadow": "0 7px black",
+    });
+    localStorage.setItem("games", JSON.stringify(games));
 }
 
-});
 
-$(document).mousedown(function(e) 
-{
-    if (!$("#settings-panel").is(e.target) && $("#settings-panel").has(e.target).length === 0) {
-        if (!$("#settings-icon").is(e.target) && $("#settings-icon").has(e.target).length === 0) {
-            if(settings_open){
-                closeSettings();
+$(document).ready(function (){
+    $("#settings-done-btn").click(closeSettings);
+
+    $("#settings-icon").click(function(){
+    if(settings_open){
+        closeSettings();
+    }
+    else{
+        openSettings()
+    }
+
+    });
+
+    localStorage.setItem("games", JSON.stringify(games_list));
+
+    $( "#game-grid" ).toggle();
+
+    $("#game-button").click(function(){
+        $( "#game-grid" ).slideToggle( "fast", function() {
+            // Animation complete.
+        });
+    })
+
+    $(".game-thumbnail").click(function(){
+        let name = $(this).attr('id');
+        let games = JSON.parse(localStorage.getItem("games"));
+        const game = games.filter((game) => { return game.name === name; });
+        console.log(game[0].name + " selected: " + game[0].selected);
+        if(game[0].selected){
+            deselectGame(name);
+        }
+        else{
+            selectGame(name);
+        }
+        
+    });
+
+    $(document).mousedown(function(e) 
+    {
+        if (!$("#settings-panel").is(e.target) && $("#settings-panel").has(e.target).length === 0) {
+            if (!$("#settings-icon").is(e.target) && $("#settings-icon").has(e.target).length === 0) {
+                if(settings_open){
+                    closeSettings();
+                }
             }
         }
-    }
-});
+    });
+})
+
