@@ -3,6 +3,75 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+h1{
+    color:white;
+    text-align: center;
+}
+
+p{
+    color:white;
+    text-align: center;
+    border-bottom: 1px white solid;
+}
+
+a{
+    text-decoration: none;
+    color:white;
+}
+
+
+.button-container{
+    position:absolute;
+    width: 120px;
+    left: 50%;
+    margin-left: -60px;
+}
+
+
+.main-button{
+    border: 2px solid white;
+    border-radius: 20px;
+    width: 100px;
+    color: white;
+    padding: 5px;
+    margin: 10px;
+    outline:none;
+   
+}
+
+.start{
+    background-color: #ff5656;
+    box-shadow: 0 7px #ffffff;
+}
+
+.select-game{
+    background-color: #ff6f00;
+    box-shadow: 0 7px #ffffff;
+}
+
+.start:active{
+    outline:none;
+    transform: translateY(4px);
+    box-shadow: 0 3px;
+}
+
+.select-game:active{
+    outline:none;
+    transform: translateY(4px);
+    box-shadow: 0 3px;
+}
+
+
+.center{
+    position: absolute;
+    left: 50%;
+    width: 300px;
+    margin-left: -150px;
+}
+
+.logo{
+    width: 300px;
+}
 
 .large{
     width: 400px;

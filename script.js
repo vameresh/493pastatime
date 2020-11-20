@@ -13,7 +13,7 @@ let tomatoSetup = {
         <input type="number" v-model="input"  @change= "commit" @input="update" class="hidden-input" ref="input"></input>
     </div>
     `,
-    props: ["is_work"],
+    props: ["type"],
     data: function(){
         return{
             seconds: null,
@@ -25,6 +25,7 @@ let tomatoSetup = {
     },
     methods: {
         redirect(){
+            console.log(this.$refs);
             this.$refs.input.focus();
         },
         update(){
@@ -54,15 +55,19 @@ let tomatoSetup = {
         },
         commit(){
             let time = this.hours * 3600 + this.minutes * 60 + this.seconds * 1;
-            if(this.is_work){
-                console.log("updated work")
+            console.log(this.type);
+            if(this.type === "work"){
+                console.log("updated work");
                 this.settings.work = time;
             }
-            else{
-                console.log("updated work")
+            if(this.type === "break"){
+                console.log("updated break");
                 this.settings.break = time;
             }
         }
+    },
+    created(){
+        console.log(this.type);
     },
     filters: {
         digitify(input){
@@ -114,7 +119,6 @@ let tomatoTimer = {
         increment(){
             let set_time = this.is_work ? this.settings.work : this.settings.break;
             let percent = 1- this.time / set_time;
-            console.log("percent: "+ percent)
             return percent * 100 + '%';
         }
     },
