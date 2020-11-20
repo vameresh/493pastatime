@@ -45,12 +45,15 @@ label{
 p{
     color:white;
     text-align: center;
-    border-bottom: 1px white solid;
 }
 
 a{
     text-decoration: none;
     color:white;
+}
+a:hover{
+    text-decoration: underline;
+    text-decoration-color: white;
 }
 
 
@@ -104,6 +107,14 @@ a{
 }
 
 .top-left{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 50px;
+    margin: 20px;
+}
+
+.top-right{
     position: absolute;
     left: 100%;
     width: 350px;
