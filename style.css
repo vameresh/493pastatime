@@ -252,4 +252,20 @@ input:focus{
 .hidden-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
+}
+
+hr{
+    height:3px;
+    border-width:0;
+    background-color:tomato
+}
+
+footer {
+    position: absolute;
+    bottom:0px;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: tomato;
+    color: white;
+}
