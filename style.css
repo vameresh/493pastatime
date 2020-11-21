@@ -23,6 +23,20 @@ label{
 }
 
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+border-radius: 10px;
+}
+   
+::-webkit-scrollbar-thumb {
+    background: grey; 
+    border-radius: 10px;
+}
+
+
 .settings-icon{
     position: absolute;
     top: 0;
@@ -45,9 +59,10 @@ label{
     margin-top: 15px;
     padding: 20px;
     width: 400px;
-    height: 95vh;
+    height: 95%;
     background-color: #e06666;
     border-radius: 20px;
+    overflow-y: scroll;
 }
 
 p{
@@ -320,6 +335,9 @@ footer {
     box-shadow: 0 7px black;
 }
 
+.game-frame{
+    height: 100vh;
+}
 
 
 .game-grid{
@@ -330,4 +348,22 @@ footer {
     width: 520px;
     height: 260px;
     padding: 10px;
+}
+
+.game-list{
+    margin: 10px;
+    width: fit-content;
+}
+
+.game-list > .row{
+    margin-left: 20px;
+}
+
+.game-label{
+    font-size:20px;
+}
+
+.checkbox{
+    float:right;
+    padding-left: 20px;
 }

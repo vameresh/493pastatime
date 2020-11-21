@@ -1,65 +1,5 @@
 var settings_open = false;
 
-
-var games_list= [
-    {
-        "name": "Snake",
-        "image": "images/games/snake.png",
-        "src" : "#",
-        "selected": false,
-        "played": false,
-    },
-    {
-        "name": "Asteroid",
-        "image": "images/games/asteroid.png",
-        "src": "#",
-        "selected": false,
-        "played": false,
-    },
-    {
-        "name": "Frogger",
-        "image": "images/games/frogger.png",
-        "src": "#",
-        "selected": false,
-        "played": false,
-    },
-    {
-        "name": "Youtube",
-        "image": "images/games/youtube.png",
-        "src": "https://www.youtube.com/",
-        "selected": false,
-        "played": false,
-    },
-    {
-        "name": "Netflix",
-        "image": "images/games/netflix.png",
-        "src": "https://www.netflix.com/",
-        "selected": false,
-        "played": false,
-    },
-    {
-        "name": "Hulu",
-        "image": "images/games/hulu.png",
-        "src": "https://www.hulu.com/",
-        "selected": false,
-        "played": false,
-    },
-    {
-        "name": "Custom",
-        "image": "images/games/custom.png",
-        "src": "#",
-        "selected": false,
-        "played": false,
-    },
-    {
-        "name": "None",
-        "image":  "images/games/none.png",
-        "src": "#",
-        "selected": false,
-        "played": false,
-    }
-];
-
 let tomatoSetup = {
     template:`
     <div>
@@ -303,22 +243,80 @@ let tomatoTimer = {
 }
 
 let gameFrame = {
-    template: ``
+    template: `
+    <div v-html = "game.src" id="game-frame" class="game-frame">
+    </div>
+    `,
+    data: function(){
+        return{
+            game:null
+        }
+    },
+    created(){
+        let found = false;
+        let games = JSON.parse(localStorage.getItem("games"));
+        games.forEach(game => {
+            if(game.selected){
+                if(!game.played && !found){
+                    game.played = true;
+                    this.game = game;
+                    found=true;
+                }
+                else{
+                    game.played = false;
+                }
+            }
+        });
+        if(!found){
+        games.forEach(game => {
+            if(!game.played && !found){
+                game.played = true;
+                this.game = game;
+                found=true;
+            }
+        });
+        }
+        $("#game-frame").html(this.game.src);
+        localStorage.setItem("games", JSON.stringify(games));
+    },
+    methods:{
+        find_game(){
+            
+        }
+    }
 }
 
-let gameSelect = {
+let gameList = {
+    template: `
+    <div class="game-list">
+        <div class="row" v-for="i in Math.ceil(games.length / 2)">
+            <div class="col-sm-6" v-for="game in games.slice((i - 1) * 2, i * 2)">
+            <p :class="'class-'+ game.name">{{game.name}}</p>
+            <img :class="game.name" class= "game-thumbnail" :src=game.image />
+            </div>
+        </div>
+    </div>`,
+    created(){
+        this.games = JSON.parse(localStorage.getItem("games"));
+    },
+    data: function(){
+        return {
+            games: null
+        }
+    }
+}
+
+let gameGrid = {
     template: `
     <div id="game-grid" class="game-grid">
         <div class="row" v-for="i in Math.ceil(games.length / 4)">
             <div class="col-sm-3" v-for="game in games.slice((i - 1) * 4, i * 4)">
-            <p>{{game.name}}</p>
-            <img v-bind:id="game.name" class= "game-thumbnail" :src=game.image />
+            <p :class="'class-'+ game.name">{{game.name}}</p>
+            <img :class="game.name" class= "game-thumbnail" :src=game.image />
             </div>
         </div>
     </div>`,
     props:["display"],
-    methods:{
-    },
     created(){
         this.games = JSON.parse(localStorage.getItem("games"));
     },
@@ -334,7 +332,8 @@ var app = new Vue({
     components: {
         "tomato-timer": tomatoTimer,
         "tomato-setup": tomatoSetup,
-        "game-select": gameSelect,
+        "game-grid": gameGrid,
+        "game-list": gameList,
         "game-frame": gameFrame,
     }
 });
@@ -355,8 +354,8 @@ function openSettings(){
 }
 
 function selectGame(name){
-    console.log("select game");
-    let id = "#" + name;
+    let id = "." + name;
+    let title = ".class-" + name;
     let games = JSON.parse(localStorage.getItem("games"));
     const game = games.filter((game) => { return game.name === name; });
     game[0].selected=true;
@@ -364,28 +363,39 @@ function selectGame(name){
         "transform": "translateY(4px)",
         "box-shadow": "0 3px black",
     });
+    $(title).css({
+        "font-weight": "bold"
+    });
     if(name==="None"){
         games.forEach(game => {
             if(game.name !== "None"){
-                console.log("deselecting" + game.name);
+                game.selected = false;
                 deselectGame(game.name);
             }
         });
     }else{
-        deselectGame("None")
+        games.forEach(game => {
+            if(game.name === "None"){
+                game.selected = false;
+                deselectGame(game.name);
+            }
+        });
     }
     localStorage.setItem("games", JSON.stringify(games));
 }
 
 function deselectGame(name){
-    console.log("deselect game");
-    let id = "#" + name;
+    let id = "." + name;
+    let title = ".class-" + name;
     let games = JSON.parse(localStorage.getItem("games"));
     const game = games.filter((game) => { return game.name === name; });
     game[0].selected=false;
     $(id).css({
         "transform": "translateY(0px)",
         "box-shadow": "0 7px black",
+    });
+    $(title).css({
+        "font-weight": "normal"
     });
     localStorage.setItem("games", JSON.stringify(games));
 }
@@ -404,21 +414,102 @@ $(document).ready(function (){
 
     });
 
-    localStorage.setItem("games", JSON.stringify(games_list));
+    let games_list= [
+        {
+            "name": "Snake",
+            "image": "images/games/snake.png",
+            "src" : '<iframe width="100%" height="100%" src="https://www.addictinggames.com/embed/html5-games/18478" scrolling="no"></iframe>',
+            "selected": false,
+            "played": false,
+        },
+        {
+            "name": "Asteroid",
+            "image": "images/games/asteroid.png",
+            "src": "#",
+            "selected": false,
+            "played": false,
+        },
+        {
+            "name": "Frogger",
+            "image": "images/games/frogger.png",
+            "src": "#",
+            "selected": false,
+            "played": false,
+        },
+        {
+            "name": "Youtube",
+            "image": "images/games/youtube.png",
+            "src": "https://www.youtube.com/",
+            "selected": false,
+            "played": false,
+        },
+        {
+            "name": "Netflix",
+            "image": "images/games/netflix.png",
+            "src": "https://www.netflix.com/",
+            "selected": false,
+            "played": false,
+        },
+        {
+            "name": "Hulu",
+            "image": "images/games/hulu.png",
+            "src": "https://www.hulu.com/",
+            "selected": false,
+            "played": false,
+        },
+        {
+            "name": "Custom",
+            "image": "images/games/custom.png",
+            "src": "#",
+            "selected": false,
+            "played": false,
+        },
+        {
+            "name": "None",
+            "image":  "images/games/none.png",
+            "src": "#",
+            "selected": false,
+            "played": false,
+        }
+    ];
 
-    $( "#game-grid" ).toggle();
+    if(localStorage.getItem("gameset")=='undefined' || localStorage.getItem("gameset")=='false'){
+        //console.log("reset")
+        localStorage.setItem("games", JSON.stringify(games_list));
+        localStorage.setItem("gameset", "true");
+    }
+    else{
+        //console.log("set")
+        //localStorage.setItem("gameset", "false");
+        let games = JSON.parse(localStorage.getItem("games"));
+        games.forEach(game => {
+            if(game.selected){
+                selectGame(game.name);
+            }
+            else{
+                deselectGame(game.name);
+            }
+        });
+    
+    }
+
+
+    
+    $( "#game-grid").toggle();
 
     $("#game-button").click(function(){
+        console.log("toggle")
         $( "#game-grid" ).slideToggle( "fast", function() {
             // Animation complete.
         });
     })
 
     $(".game-thumbnail").click(function(){
-        let name = $(this).attr('id');
+        let name = $(this).attr('class');
+        name = name.split(" ")[1]
+        console.log(name)
         let games = JSON.parse(localStorage.getItem("games"));
         const game = games.filter((game) => { return game.name === name; });
-        console.log(game[0].name + " selected: " + game[0].selected);
         if(game[0].selected){
             deselectGame(name);
         }
