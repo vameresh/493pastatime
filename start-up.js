@@ -1,24 +1,27 @@
 let games_list= [
     {
-        "name": "Snake",
+        "name": "Invaders",
         "image": "images/games/snake.png",
-        "src" : '<iframe width="100%" height="100%" src="https://www.addictinggames.com/embed/html5-games/18478" scrolling="no"></iframe>',
+        "src" : '<iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width:800px;height:550px;border:none;" frameborder="0" scrolling="no"></iframe>',
         "selected": false,
         "played": false,
+        "type": "game"
     },
     {
-        "name": "Asteroid",
+        "name": "Tetris",
         "image": "images/games/asteroid.png",
-        "src": "#",
+        "src": '<iframe src="https://funhtml5games.com?embed=tetris" style="width:800px;height:490px;border:none;" frameborder="0" scrolling="no"></iframe>',
         "selected": false,
         "played": false,
+        "type": "game"
     },
     {
         "name": "Frogger",
         "image": "images/games/frogger.png",
-        "src": "#",
+        "src": '<iframe src="https://funhtml5games.com?embed=frogger" style="width:420px;height:520px;border:none;" frameborder="0" scrolling="no"></iframe>',
         "selected": false,
         "played": false,
+        "type": "game"
     },
     {
         "name": "Youtube",
@@ -26,6 +29,7 @@ let games_list= [
         "src": "https://www.youtube.com/",
         "selected": false,
         "played": false,
+        "type": "break"
     },
     {
         "name": "Netflix",
@@ -33,6 +37,7 @@ let games_list= [
         "src": "https://www.netflix.com/",
         "selected": false,
         "played": false,
+        "type": "break"
     },
     {
         "name": "Hulu",
@@ -40,6 +45,7 @@ let games_list= [
         "src": "https://www.hulu.com/",
         "selected": false,
         "played": false,
+        "type": "break"
     },
     {
         "name": "Custom",
@@ -47,6 +53,7 @@ let games_list= [
         "src": "#",
         "selected": false,
         "played": false,
+        "type": "break"
     },
     {
         "name": "None",
@@ -54,6 +61,7 @@ let games_list= [
         "src": "#",
         "selected": false,
         "played": false,
+        "type": "break"
     }
 ];
 

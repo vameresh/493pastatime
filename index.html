@@ -12,7 +12,6 @@
     </head>
     <body>
         <div id="app">
-
             <div class="settings-panel" id = "settings-panel">
                 <tomato-setup class = "tomato-input" type="work"></tomato-setup>
                 <tomato-setup class = "tomato-input" type="break"></tomato-setup>
@@ -28,6 +27,12 @@
                 <p><i>A great way to pas-ta-time!</i></p>
                 <a href="about.html"><p>What is PastaTime and how does it work?</p></a>
                 <div class="button-container">
+                    <button id="time-button" class = "select-game main-button">Set Time!</button>
+                    </br>
+                    <div class ="timer-grid" id="timer-grid">
+                        <tomato-setup class = "tomato-input shaded" type="work"></tomato-setup>
+                        <tomato-setup class = "tomato-input shaded" type="break"></tomato-setup>
+                    </div>
                     <button id="game-button" class = "select-game main-button">Select Break!</button>
                     </br>
                     <game-grid display="main"></game-grid>

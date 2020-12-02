@@ -88,10 +88,19 @@ a:hover{
 }
 
 
+.done-buttons{
+    position:absolute;
+    width: 145px;
+    left: 50%;
+    top:50%;
+    margin-left: -70px;
+    margin-top: 50px;
+}
+
 .main-button{
     border: 2px solid black;
     border-radius: 20px;
-    width: 110px;
+    width: 115px;
     color: black;
     padding: 5px;
     margin: 10px;
@@ -124,6 +133,7 @@ a:hover{
 .start{
     background-color: #ff5656;
     box-shadow: 0 7px black;
+    margin-bottom: 20px;
 }
 
 .select-game{
@@ -222,10 +232,10 @@ a:hover{
 }
 
 .countdown-left{
+    display: inline;
     font-size: 25px;
     color: black;
     font-weight: bold;
-    display: inline;
     text-align: center;
     width: 100%;
     height: 100%;
@@ -247,7 +257,7 @@ a:hover{
 
 .hidden-input{
     position: relative;
-    width: 3px;
+    width: 0px;
     background: none;
     border: none;
     outline:none;
@@ -263,12 +273,20 @@ a:hover{
 .tomato-input{
     margin: 10px;
     width: fit-content;
-    
     max-height: 50px;
+}
+
+.timer-grid{
+    margin-left: -100px;
+    width: 520px;
 }
 
 .tomato-input:focus-within > .timer-input{
     border: 2px solid black;
+}
+
+.shaded > .timer-input{
+    background-color: #e06666;
 }
 
 .timer-input{
@@ -336,8 +354,10 @@ footer {
 }
 
 .game-frame{
-    height: 100vh;
+    text-align:center;
+    margin: 0px auto;
 }
+
 
 
 .game-grid{

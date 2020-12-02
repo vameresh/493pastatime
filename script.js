@@ -1,4 +1,5 @@
 var settings_open = false;
+var work_time = 0;
 
 let tomatoSetup = {
     template:`
@@ -27,26 +28,31 @@ let tomatoSetup = {
         update(){
             if(this.input.length > 6){
                 this.input = this.input.slice(1);
+                console.log(this.input);
             }
             if(this.input.length > 4){
                 this.hours = this.input.slice(0, this.input.length-4);
                 this.minutes = this.input.slice(this.input.length-4, this.input.length-2);
                 this.seconds = this.input.slice(this.input.length-2, this.input.length);
+                console.log(this.hours +":" + this.minutes+ ":" + this.seconds);
             }
             else if(this.input.length > 2){
                 this.hours = 0;
                 this.minutes = this.input.slice(0, this.input.length-2);
                 this.seconds = this.input.slice(this.input.length-2, this.input.length);
+                console.log(this.hours +":" + this.minutes+ ":" + this.seconds);
             }
             else if(this.input.length > 0){
                 this.hours = 0;
                 this.minutes = 0;
                 this.seconds = this.input.slice(0, this.input.length);
+                console.log(this.hours +":" + this.minutes+ ":" + this.seconds);
             }
             else{
                 this.hours = 0;
                 this.minutes = 0;
                 this.seconds = 0;
+                console.log(this.hours +":" + this.minutes+ ":" + this.seconds);
             }
             this.commit();
         },
@@ -145,29 +151,15 @@ let tomatoTimer = {
         }
     },
     created() {
-        if(this.type === "work"){
-            if (localStorage.getItem("work-time") !== null){
-                this.set_time = localStorage.getItem('work-time');
-            }
-            else{
-                this.set_time = 1500;
-            }
-        }
-
-        if(this.type === "break"){
-            if (localStorage.getItem("break-time") !== null){
-                this.set_time = localStorage.getItem('break-time');
-            }
-            else{
-                this.set_time = 300;
-            }
-        }
-        this.time = this.set_time;
+        this.restart();
         this.start();
     },
     methods: {
         start(){
             this.is_running = true;
+            if(this.type==="break"){
+                $("#game-frame").css("opacity", "100%");
+            }
 
             this.timer = setInterval(()=>{
                 if(this.time > 0){
@@ -215,7 +207,12 @@ let tomatoTimer = {
             }
         },
         done(){
+            // TODO
             this.restart();
+            $("#done-buttons").css("display", "block");
+            if(this.type==="break"){
+                $("#game-frame").css("opacity", "20%");
+            }
         },
         home(){
             this.restart();
@@ -244,12 +241,13 @@ let tomatoTimer = {
 
 let gameFrame = {
     template: `
-    <div v-html = "game.src" id="game-frame" class="game-frame">
+    <div v-html = "src" id="game-frame" class="game-frame">
     </div>
     `,
     data: function(){
         return{
-            game:null
+            game:null,
+            src:null
         }
     },
     created(){
@@ -257,33 +255,54 @@ let gameFrame = {
         let games = JSON.parse(localStorage.getItem("games"));
         games.forEach(game => {
             if(game.selected){
+                console.log("scanning " + game.name)
                 if(!game.played && !found){
+                    console.log("found " + game.name)
                     game.played = true;
                     this.game = game;
                     found=true;
                 }
-                else{
-                    game.played = false;
-                }
             }
         });
         if(!found){
-        games.forEach(game => {
-            if(!game.played && !found){
-                game.played = true;
-                this.game = game;
-                found=true;
-            }
-        });
+            games.forEach(game => {
+                if(game.selected){
+                    console.log("resetting " + game.name)
+                    game.played = false;
+                }
+            });
+            games.forEach(game => {
+                if(game.selected){
+                    console.log("rescanning " + game.name)
+                    if(!game.played && !found){
+                        console.log("refound " + game.name)
+                        game.played = true;
+                        this.game = game;
+                        found=true;
+                    }
+                }
+            });
         }
-        $("#game-frame").html(this.game.src);
+        if(this.game.type === "break"){
+            this.src = "<h1> Enjoy your break! <h1>";
+            if(this.game.name !== "None"){
+                var win = window.open(this.game.src, '_blank');
+                if (win) {
+                    //Browser has allowed it to be opened
+                    win.focus();
+                } else {
+                    //Browser has blocked it
+                    alert('Please allow popups for this website and refresh!');
+                }
+            }
+            // source: https://stackoverflow.com/questions/19851782/how-to-open-a-url-in-a-new-tab-using-javascript-or-jquery
+
+        }
+        else{
+            this.src = this.game.src;
+        }
         localStorage.setItem("games", JSON.stringify(games));
     },
-    methods:{
-        find_game(){
-            
-        }
-    }
 }
 
 let gameList = {
@@ -401,11 +420,9 @@ function deselectGame(name){
     localStorage.setItem("games", JSON.stringify(games));
 }
 
-$
 
 $(document).ready(function (){
 
-    console.log("set")
     //localStorage.setItem("gameset", "false");
     let games = JSON.parse(localStorage.getItem("games"));
     games.forEach(game => {
@@ -417,24 +434,35 @@ $(document).ready(function (){
         }
     });
 
+    $("#done-buttons").css("display", "none");
+
 
     $("#settings-done-btn").click(closeSettings);
 
     $("#settings-icon").click(function(){
-    if(settings_open){
-        closeSettings();
-    }
-    else{
-        openSettings()
-    }
-
+        if(settings_open){
+            closeSettings();
+        }
+        else{
+            openSettings()
+        }
     });
+
     
+    
+    $( "#timer-grid").toggle();
     $( "#game-grid").toggle();
 
     $("#game-button").click(function(){
         console.log("toggle")
-        $( "#game-grid" ).slideToggle( "fast", function() {
+        $( "#game-grid" ).slideToggle( "medium", function() {
+            // Animation complete.
+        });
+    })
+
+    $("#time-button").click(function(){
+        console.log("toggle")
+        $( "#timer-grid" ).slideToggle( "medium", function() {
             // Animation complete.
         });
     })
@@ -454,6 +482,12 @@ $(document).ready(function (){
         
     });
 
+    $("#reset-button").click(function(){
+        $("#done-buttons").css("display", "none");
+        app.$refs.timer.start();
+    })
+
+
     $(document).mousedown(function(e) 
     {
         if (!$("#settings-panel").is(e.target) && $("#settings-panel").has(e.target).length === 0) {
@@ -464,5 +498,6 @@ $(document).ready(function (){
             }
         }
     });
+
 })
 

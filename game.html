@@ -18,9 +18,16 @@
                 <button id="settings-done-btn" class = "done-button">Done!</button>
             </div>
             <input type="image" src="images/settings.svg" class = "settings-icon" id = "settings-icon"></button>
-            <tomato-timer class = "top-right" size="small" type="break"></tomato-timer> 
+            <tomato-timer ref = "timer" class = "top-right" size="small" type="break"></tomato-timer> 
             
-            <game-frame></game-frame>
+            <game-frame id = "game-frame"></game-frame>
+
+            <div class = "done-buttons" id = "done-buttons">
+                <button id="reset-button" class = "select-game main-button">Continue Break!</button>
+                </br>
+                <a href="work.html"><button id="next-button" class = "start main-button">Go to Work!</button></a>
+                </br>
+            </div>
 
         
         </div>
