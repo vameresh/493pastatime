@@ -112,17 +112,52 @@ let tomatoSetup = {
 
 let tomatoTimer = {
     template: `
-        <div :class="divSize">
-            <div :class="countdownLoc">{{time | clockify}}</div>
-            <img :class="size" class="fill" src="images/tomatoFill.svg" />
-            <div :class="size" class = "cover" v-bind:style="{ height: increment }" />
-            <img :class="size" class="outline"  src="images/tomatoOutline.svg" />   
-            <div :class="buttonLoc">
-                <input type="image" src="images/home.svg" @click="home" />
-                <input type="image" src="images/play.svg" v-if="!is_running" @click="start" />
-                <input type="image" src="images/pause.svg" v-if="is_running"  @click="pause" />
-                <input type="image" src="images/restart.svg" @click="restart" />
-                <input type="image" src="images/skip.svg" @click="skip" />
+        <div>
+            <div v-if="type=='work'">
+                <div class = "row">
+                    <div class = "col-sm">
+                        <div class="countdown-font">{{time | clockify}}</div>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col-sm">
+                        <div class="med">
+                            <img class="fill med offset-med" src="images/tomatoFill.svg" />
+                            <div class = "cover med offset-med" v-bind:style="{ height: increment }" />
+                            <img class="outline med offset-med"  src="images/tomatoOutline.svg" /> 
+                        </div>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col-sm">
+                        <div>
+                            <input type="image" src="images/home.svg" @click="home" />
+                            <input type="image" src="images/play.svg" v-if="!is_running" @click="start" />
+                            <input type="image" src="images/pause.svg" v-if="is_running"  @click="pause" />
+                            <input type="image" src="images/restart.svg" @click="restart" />
+                            <input type="image" src="images/skip.svg" @click="skip" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <div class = "row">
+                    <div class = "col-sm-9" align="right">
+                        <div class="countdown-font">{{time | clockify}}</div>
+                    </div>
+                    <div class="col-sm-1 small" align="center">
+                        <img class="fill small offset-small" src="images/tomatoFill.svg" />
+                        <div class = "cover small offset-small" v-bind:style="{ height: increment }" />
+                        <img class="outline small offset-small"  src="images/tomatoOutline.svg" /> 
+                    </div>
+                    <div class = "col-sm-1" align="left">
+                        <input type="image" src="images/home.svg" @click="home" />
+                        <input type="image" src="images/play.svg" v-if="!is_running" @click="start" />
+                        <input type="image" src="images/pause.svg" v-if="is_running"  @click="pause" />
+                        <input type="image" src="images/restart.svg" @click="restart" />
+                        <input type="image" src="images/skip.svg" @click="skip" />
+                    </div>
+                </div>
             </div>
         </div>
     `,
@@ -136,18 +171,10 @@ let tomatoTimer = {
         }
     },
     computed:{
-        countdownLoc(){
-            return (this.size == "small") ? "countdown-left" : "countdown-mid";
-        },
-        buttonLoc(){
-            return (this.size == "small") ? "buttons-right" : "buttons-bottom";
-        },
-        divSize(){
-            return (this.size == "small") ?  "wide" : this.size;
-        },
         increment(){
+            let height = (this.type==="work") ? 270 : 62;
             let percent = 1- this.time / this.set_time;
-            return percent * 100 + '%';
+            return percent * height + 'px';
         }
     },
     created() {
@@ -212,6 +239,9 @@ let tomatoTimer = {
             $("#done-buttons").css("display", "block");
             if(this.type==="break"){
                 $("#game-frame").css("opacity", "20%");
+                if(!document.hasFocus()){
+                    alert("Times Up!")
+                }
             }
         },
         home(){
@@ -305,17 +335,17 @@ let gameFrame = {
     },
 }
 
-let gameList = {
+let gameGrid = {
     template: `
-    <div class="game-list">
-        <label>Select Break:</label>
-        <div class="row" v-for="i in Math.ceil(games.length / 2)">
-            <div class="col-sm-6" v-for="game in games.slice((i - 1) * 2, i * 2)">
-            <p :class="'class-'+ game.name">{{game.name}}</p>
-            <img :class="game.name" class= "game-thumbnail" :src=game.image />
+    <div class ="container">
+        <div class="row" v-for="i in Math.ceil(games.length / rowsize)">
+            <div align="center" :class="'col-sm-' + 12/rowsize" v-for="game in games.slice((i - 1) * rowsize, i * rowsize)">
+                <p :class="'class-'+ game.name">{{game.name}}</p>
+                <img :class="game.name" class= "game-thumbnail" :src=game.image />
             </div>
         </div>
     </div>`,
+    props:["rowsize"],
     created(){
         this.games = JSON.parse(localStorage.getItem("games"));
     },
@@ -326,25 +356,79 @@ let gameList = {
     }
 }
 
-let gameGrid = {
+let settingsPanel = {
     template: `
-    <div id="game-grid" class="game-grid">
-        <div class="row" v-for="i in Math.ceil(games.length / 4)">
-            <div class="col-sm-3" v-for="game in games.slice((i - 1) * 4, i * 4)">
-            <p :class="'class-'+ game.name">{{game.name}}</p>
-            <img :class="game.name" class= "game-thumbnail" :src=game.image />
+    <div>
+        <div class="settings-panel" id = "settings-panel">
+            <div class = "row">
+                <div class = "col-sm">
+                    <tomato-setup class = "tomato-input" type="work"></tomato-setup>
+                </div>
+            </div>
+            </br>
+            <div class = "row">
+                <div class = "col-sm">
+                    <tomato-setup class = "tomato-input" type="break"></tomato-setup>
+                </div>
+            </div>
+            </br>
+            <div class = "row">
+                <div class = "col-sm">
+                    <label> Select Break: </label>
+                    <game-grid rowsize=2 class="game-list" ></game-grid>
+                </div>
+            </div>
+            </br>
+            <div class = "row">
+                <div class = "col-sm" align="center">
+                    <button id="settings-done-btn" class = "primary-button">Done!</button>
+                </div>
             </div>
         </div>
+        <input type="image" src="images/settings.svg" class = "settings-icon" id = "settings-icon"></input>
     </div>`,
-    props:["display"],
-    created(){
-        this.games = JSON.parse(localStorage.getItem("games"));
+    components: {
+        "tomato-setup": tomatoSetup,
+        "game-grid": gameGrid,
     },
-    data: function(){
-        return {
-            games: null
+}
+
+let doneButtons = {
+    template: `
+    <div class = "done-buttons" id = "done-buttons">
+        <button id="reset-button" class="secondary-button" v-html="secondary" ></button>
+        </br>
+        <a :href="goto"><button id="next-button" class = "primary-button" v-html="primary" ></button></a>
+        </br>
+    </div>`,
+    props: ["type"],
+    computed: {
+        primary(){
+            if (this.type==="work"){
+                return "Go to Break!"
+            }
+            else{
+                return "Go to Work!"
+            }
+
+        },
+        secondary(){
+            if (this.type==="work"){
+                return "Continue Work!"
+            }
+            else{
+                return "Continue Break!"
+            }
+        },
+        goto(){
+            if (this.type==="work"){
+                return "game.html"
+            }
+            else{
+                return "work.html"
+            }
         }
-    }
+    },
 }
 
 var app = new Vue({
@@ -353,8 +437,9 @@ var app = new Vue({
         "tomato-timer": tomatoTimer,
         "tomato-setup": tomatoSetup,
         "game-grid": gameGrid,
-        "game-list": gameList,
         "game-frame": gameFrame,
+        "settings-panel": settingsPanel,
+        "done-buttons": doneButtons,
     }
 });
 
@@ -436,7 +521,6 @@ $(document).ready(function (){
 
     $("#done-buttons").css("display", "none");
 
-
     $("#settings-done-btn").click(closeSettings);
 
     $("#settings-icon").click(function(){
@@ -449,9 +533,6 @@ $(document).ready(function (){
     });
 
     
-    
-    $( "#timer-grid").toggle();
-    $( "#game-grid").toggle();
 
     $("#game-button").click(function(){
         console.log("toggle")

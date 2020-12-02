@@ -11,25 +11,24 @@
     <body>
         <div id="app">
 
-            <div class="settings-panel" id = "settings-panel">
-                <tomato-setup class = "tomato-input" type="work"></tomato-setup>
-                <tomato-setup class = "tomato-input" type="break"></tomato-setup>
-                <game-list></game-list>
-                <button id="settings-done-btn" class = "done-button">Done!</button>
-            </div>
-            <input type="image" src="images/settings.svg" class = "settings-icon" id = "settings-icon"></button>
-            <tomato-timer ref = "timer" class = "top-right" size="small" type="break"></tomato-timer> 
-            
-            <game-frame id = "game-frame"></game-frame>
+            <settings-panel></settings-panel>
 
-            <div class = "done-buttons" id = "done-buttons">
-                <button id="reset-button" class = "select-game main-button">Continue Break!</button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12" align="center">
+                        <tomato-timer ref = "timer" size="small" type="break"></tomato-timer> 
+                    </div>
+                </div>
                 </br>
-                <a href="work.html"><button id="next-button" class = "start main-button">Go to Work!</button></a>
-                </br>
-            </div>
+                <div class="row">
+                    <div class="col-sm-12" align="center">
+                        <game-frame id = "game-frame"></game-frame>
+                        <done-buttons type="break" class="buttons-middle"></done-buttons>
+                    </div>
+                </div>
 
-        
+            </div>
+                    
         </div>
         <script src="script.js"></script>
     </body>

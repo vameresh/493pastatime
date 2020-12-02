@@ -12,32 +12,38 @@
     </head>
     <body>
         <div id="app">
-            <div class="settings-panel" id = "settings-panel">
-                <tomato-setup class = "tomato-input" type="work"></tomato-setup>
-                <tomato-setup class = "tomato-input" type="break"></tomato-setup>
-                <game-list></game-list>
-                <button id="settings-done-btn" class = "done-button">Done!</button>
+            <settings-panel></settings-panel>
 
-            </div>
-            <input type="image" src="images/settings.svg" class = "settings-icon" id = "settings-icon"></button>
-                
-            <div class = "center">
-                <img class= "logo" src="images/tomatoLogo.svg" />
-                <h1>PastaTime</h1>
-                <p><i>A great way to pas-ta-time!</i></p>
-                <a href="about.html"><p>What is PastaTime and how does it work?</p></a>
-                <div class="button-container">
-                    <button id="time-button" class = "select-game main-button">Set Time!</button>
-                    </br>
-                    <div class ="timer-grid" id="timer-grid">
-                        <tomato-setup class = "tomato-input shaded" type="work"></tomato-setup>
-                        <tomato-setup class = "tomato-input shaded" type="break"></tomato-setup>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12" align="center">
+                        <img class= "logo" src="images/tomatoLogo.svg" />
+                        <h1>PastaTime</h1>
+                        <p><i>A great way to pas-ta-time!</i></p>
+                        <a href="about.html"><p>What is PastaTime and how does it work?</p></a>
                     </div>
-                    <button id="game-button" class = "select-game main-button">Select Break!</button>
-                    </br>
-                    <game-grid display="main"></game-grid>
-                    </br>
-                    <a href="work.html"><button class = "start main-button">Start!</button></a>
+                </div>
+                <div class="row">
+                    <div class="col-12"  align="center">
+                        <button id="time-button" class = "secondary-button">Set Time!</button>
+                        <div id="timer-grid" class ="timer-grid">
+                            <tomato-setup class = "tomato-input shaded" type="work"></tomato-setup>
+                            <tomato-setup class = "tomato-input shaded" type="break"></tomato-setup>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12"  align="center">
+                        <button id="game-button" class = "secondary-button">Select Break!</button>
+                        </br>
+                        <game-grid id="game-grid" class="game-grid" rowsize=4 ></game-grid>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12" align="center">
+                        <a href="work.html"><button class = "primary-button">Start!</button></a>
+                    </div>
                 </div>
             </div>
         </div>

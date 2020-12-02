@@ -1,3 +1,8 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body{
     background-color:  #FF9191;
     font-family: Arial, Helvetica, sans-serif;
@@ -8,18 +13,19 @@ body{
           -ms-user-select: none; /* Internet Explorer/Edge */
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
+    margin: 20px 0px;
 }
 
 h1{
     color:black;
     font-weight: bold;
-    text-align: center;
 }
 
 label{
     color:black;
     font-size: 24px;
     font-weight: bold;
+    padding: 0px 10px;
 }
 
 
@@ -59,7 +65,7 @@ border-radius: 10px;
     margin-top: 15px;
     padding: 20px;
     width: 400px;
-    height: 95%;
+    height: 96%;
     background-color: #e06666;
     border-radius: 20px;
     overflow-y: scroll;
@@ -79,25 +85,19 @@ a:hover{
     text-decoration-color: black;
 }
 
-
-.button-container{
-    position:absolute;
-    width: 130px;
-    left: 50%;
-    margin-left: -65px;
-}
-
-
 .done-buttons{
-    position:absolute;
-    width: 145px;
-    left: 50%;
-    top:50%;
-    margin-left: -70px;
-    margin-top: 50px;
+    display:none;
 }
 
-.main-button{
+.buttons-middle{
+    position:absolute;
+    top:50%;
+    margin-top: -50px;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.primary-button{
     border: 2px solid black;
     border-radius: 20px;
     width: 115px;
@@ -105,54 +105,34 @@ a:hover{
     padding: 5px;
     margin: 10px;
     outline:none;
+    background-color: #ff5656;
+    box-shadow: 0 7px black;
+    margin-bottom: 20px;
    
 }
 
-.done-button{
+.secondary-button{
     border: 2px solid black;
     border-radius: 20px;
-    width: 110px;
+    width: 115px;
     color: black;
     padding: 5px;
     margin: 10px;
     outline:none;
-    background-color: #ff6f00;
-    box-shadow: 0 7px black;
-    font-size: 16px;
-    position: absolute;
-    left: 50%;
-    margin-left: -70px;
-}
-
-.done-button:active{
-    outline:none;
-    transform: translateY(4px);
-    box-shadow: 0 3px;
-}
-
-.start{
     background-color: #ff5656;
     box-shadow: 0 7px black;
     margin-bottom: 20px;
-}
-
-.select-game{
     background-color: #ff6f00;
     box-shadow: 0 7px black;
+   
 }
 
-.main-button:active{
+button:active{
     outline:none;
     transform: translateY(4px);
     box-shadow: 0 3px;
 }
 
-.center{
-    position: absolute;
-    left: 50%;
-    width: 300px;
-    margin-left: -150px;
-}
 
 .top-left{
     position: absolute;
@@ -163,11 +143,7 @@ a:hover{
 }
 
 .top-right{
-    position: absolute;
-    left: 100%;
-    width: 250px;
-    margin: 20px;
-    margin-left: -270px;
+    
 }
 
 .logo{
@@ -175,22 +151,23 @@ a:hover{
     margin-top: 10px;
 }
 
-.large{
-    width: 400px;
-    height: 400px;
-    position: relative
-}
-
 .med{
     width: 300px;
-    height: 313px;
-    position: relative;
+    max-height: 270px;
+    height: 334px;
+}
+
+.offset-med{
+    margin-left: -150px;
 }
 
 .small{
     width: 70px;
     height: 62px;
-    position: relative;
+}
+
+.offset-small{
+    margin-left: -35px;
 }
 
 .wide{
@@ -220,22 +197,14 @@ a:hover{
     display: inline;
 }
 
-.countdown-mid{
-    position:absolute;
+.countdown-font{
     font-size: 25px;
     color: black;
     font-weight: bold;
-    text-align: center;
-    margin-top: 55%;
-    width: 100%;
-    height: 100%;
 }
 
-.countdown-left{
+.countdown-inline{
     display: inline;
-    font-size: 25px;
-    color: black;
-    font-weight: bold;
     text-align: center;
     width: 100%;
     height: 100%;
@@ -243,15 +212,7 @@ a:hover{
     top: 200px;
 }
 
-.buttons-bottom{
-    position: absolute;
-    bottom:0px;
-    height: 20px;
-    width: 100%;
-    text-align: center;
-}
-
-.buttons-right{
+.buttons-inline{
     margin-left: 40px;
 }
 
@@ -268,17 +229,6 @@ a:hover{
     caret-color: black;
     padding-left: 3px;
     bottom: 1px;
-}
-
-.tomato-input{
-    margin: 10px;
-    width: fit-content;
-    max-height: 50px;
-}
-
-.timer-grid{
-    margin-left: -100px;
-    width: 520px;
 }
 
 .tomato-input:focus-within > .timer-input{
@@ -329,19 +279,10 @@ footer {
     position: absolute;
     bottom:0px;
     width: 100%;
-    text-align: center;
-    padding: 10px;
     background-color: tomato;
     color: black;
 }
 
-.row{
-    margin-bottom: 20px;
-}
-
-.col-sm-3{
-    width: 130px;
-}
 
 .game-thumbnail{
     width: 100px;
@@ -351,6 +292,7 @@ footer {
     background-color:black;
     border-radius: 25px;
     box-shadow: 0 7px black;
+    margin-bottom: 20px;
 }
 
 .game-frame{
@@ -359,24 +301,19 @@ footer {
 }
 
 
+.timer-grid{
+    display: none;
+    padding: 2% 10%;
+}
 
 .game-grid{
-    position:relative;
-    left:0px;
-    margin-bottom: 50px;
-    margin-left: -190px;
-    width: 520px;
-    height: 260px;
-    padding: 10px;
+    padding: 0% 10%;
+    display:none;
 }
 
 .game-list{
-    margin: 10px;
-    width: fit-content;
-}
-
-.game-list > .row{
-    margin-left: 20px;
+    width: 300px;
+    padding: 0px 10px;
 }
 
 .game-label{

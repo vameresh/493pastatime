@@ -1,7 +1,7 @@
 let games_list= [
     {
         "name": "Invaders",
-        "image": "images/games/snake.png",
+        "image": "images/games/invaders.png",
         "src" : '<iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width:800px;height:550px;border:none;" frameborder="0" scrolling="no"></iframe>',
         "selected": false,
         "played": false,
@@ -9,7 +9,7 @@ let games_list= [
     },
     {
         "name": "Tetris",
-        "image": "images/games/asteroid.png",
+        "image": "images/games/tetris.png",
         "src": '<iframe src="https://funhtml5games.com?embed=tetris" style="width:800px;height:490px;border:none;" frameborder="0" scrolling="no"></iframe>',
         "selected": false,
         "played": false,
