@@ -1,8 +1,3 @@
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 body{
     background-color:  #FF9191;
     font-family: Arial, Helvetica, sans-serif;
@@ -138,18 +133,17 @@ button:active{
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 50px;
+    width: 115px;
     margin: 20px;
 }
 
-.top-right{
-    
-}
 
 .logo{
     width: 300px;
     margin-top: 10px;
 }
+
+/* Tomato Timer */
 
 .med{
     width: 300px;
@@ -168,13 +162,6 @@ button:active{
 
 .offset-small{
     margin-left: -35px;
-}
-
-.wide{
-    width: 250px;
-    height: 44px;
-    position: relative;
-    display: inline-block;
 }
 
 .fill{
@@ -203,18 +190,7 @@ button:active{
     font-weight: bold;
 }
 
-.countdown-inline{
-    display: inline;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    top: 200px;
-}
-
-.buttons-inline{
-    margin-left: 40px;
-}
+/* Tomato Input */
 
 .hidden-input{
     position: relative;
@@ -260,6 +236,7 @@ input:focus{
     margin: 0;
 }
 
+/* About Page */
 .about{
     padding-left: 20%;
     padding-right: 20%;
@@ -283,7 +260,7 @@ footer {
     color: black;
 }
 
-
+/* Game Selection Grid */
 .game-thumbnail{
     width: 100px;
     height: 100px;
@@ -293,17 +270,6 @@ footer {
     border-radius: 25px;
     box-shadow: 0 7px black;
     margin-bottom: 20px;
-}
-
-.game-frame{
-    text-align:center;
-    margin: 0px auto;
-}
-
-
-.timer-grid{
-    display: none;
-    padding: 2% 10%;
 }
 
 .game-grid{
@@ -316,11 +282,15 @@ footer {
     padding: 0px 10px;
 }
 
-.game-label{
-    font-size:20px;
+/* Timer Selection Grid */
+.timer-grid{
+    display: none;
+    padding: 2% 10%;
 }
 
-.checkbox{
-    float:right;
-    padding-left: 20px;
+
+/* Game IFrame */
+.game-frame{
+    text-align:center;
+    margin: 0px auto;
 }
