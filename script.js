@@ -463,7 +463,7 @@ function selectGame(name){
     let title = ".class-" + name;
     let games = JSON.parse(localStorage.getItem("games"));
     const game = games.filter((game) => { return game.name === name; });
-    game[0].selected=true;
+    
     $(id).css({
         "transform": "translateY(4px)",
         "box-shadow": "0 3px black",
@@ -486,6 +486,12 @@ function selectGame(name){
             }
         });
     }
+
+    if(name==="Custom" && !game[0].selected) {
+        $('#myModal').modal('toggle')
+
+    }
+    game[0].selected=true;
     localStorage.setItem("games", JSON.stringify(games));
 }
 
@@ -579,6 +585,29 @@ $(document).ready(function (){
             }
         }
     });
+
+    modal_html = `<div class="modal fade custom-box" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                  <label>Link:</label>
+                  <input type="text"/>
+                  <button type="button">Submit</button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>`
+    $("body").append(modal_html)
 
 })
 
