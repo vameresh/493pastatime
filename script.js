@@ -234,7 +234,7 @@ let tomatoTimer = {
             }
         },
         done(){
-            // TODO
+            // TODO sound
             this.restart();
             $("#done-buttons").css("display", "block");
             if(this.type==="break"){
@@ -635,6 +635,7 @@ $(document).ready(function (){
 
     $("#reset-button").click(function(){
         $("#done-buttons").css("display", "none");
+        app.$refs.timer.restart();
         app.$refs.timer.start();
     })
 
