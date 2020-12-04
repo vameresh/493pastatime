@@ -50,7 +50,7 @@ let games_list= [
     {
         "name": "Custom",
         "image": "images/games/custom.png",
-        "src": "#",
+        "src": "",
         "selected": false,
         "played": false,
         "type": "break"
@@ -58,14 +58,12 @@ let games_list= [
     {
         "name": "None",
         "image":  "images/games/none.png",
-        "src": "#",
+        "src": "",
         "selected": false,
         "played": false,
         "type": "break"
     }
 ];
-
-console.log(localStorage.getItem("gameset"));
 
 if(localStorage.getItem("gameset") === null || localStorage.getItem("gameset") === 'undefined' || localStorage.getItem("gameset") === false){
     console.log("reset")

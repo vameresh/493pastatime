@@ -60,7 +60,7 @@ border-radius: 10px;
     margin-top: 15px;
     padding: 20px;
     width: 400px;
-    height: 96%;
+    height: 95%;
     background-color: #e06666;
     border-radius: 20px;
     overflow-y: scroll;
@@ -293,4 +293,41 @@ footer {
 .game-frame{
     text-align:center;
     margin: 0px auto;
+}
+
+/* Custom Modal */
+.modal {
+    text-align: center;
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: -200px;
+    
+}
+
+.modal-content{
+    background-color: #e06666;
+    border: none;
+    min-height: 180px;
+    min-width: 400px;
+    padding: 40px;
+    padding-bottom: 30px;
+    border-radius: 20px;
+    box-shadow: none;
+}
+
+.link-input{
+    background-color: #FF9191;
+    border-radius: 10px;
+    outline:none;
+    border: none;
+    font-size: 24px;
+    color: black;
+    padding: 0px 20px;
+    width: 100%;
+}
+
+.not-ready{
+    background-color: gray;
 }

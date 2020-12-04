@@ -431,6 +431,69 @@ let doneButtons = {
     },
 }
 
+let customModal = {
+    template:`
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class = "row">
+                <div class = "col-sm-12" align="left">
+                    <label align = "left" >Custom Link: </label>
+                </div>
+            </div>
+            <div class = "row">
+                <div class = "col-sm-12" align="left">
+                    <input class="link-input" type="text" v-model="link"> </text>
+                </div>
+            </div>
+            </br>
+            <div class = "row">
+                <div class = "col-sm-6" align="center">
+                    <button :class="check" class="primary-button" v-on:click="save_close">Save!</button>
+                </div>
+                <div class = "col-sm-6" align="center">
+                    <button class="secondary-button"  v-on:click="close">Cancel!</button>
+                </div>
+            </div>
+        </div>
+    </div>`,
+    data: function(){
+        return {
+            link: ""
+        }
+    },
+    methods:{
+        close(){
+            $('#custom_modal').modal('toggle')
+            if(this.link===""){
+                deselectGame("Custom");
+            }
+        },
+        save_close(){
+            if(this.link === ""){
+                return;
+            }
+            games = JSON.parse(localStorage.getItem("games"));
+            games[6]["src"] = this.link;
+            localStorage.setItem("games", JSON.stringify(games));
+            this.close();
+        }
+
+    },
+    computed:{
+        check(){
+            if(this.link === ""){
+                return "not-ready"
+            }
+            return ""
+        }
+    },
+    created(){
+        games = JSON.parse(localStorage.getItem("games"));
+        console.log(games[6]["src"]);
+        this.link = games[6]["src"];
+    }
+}
+
 var app = new Vue({
     el:"#app",
     components: {
@@ -440,6 +503,7 @@ var app = new Vue({
         "game-frame": gameFrame,
         "settings-panel": settingsPanel,
         "done-buttons": doneButtons,
+        "custom-modal": customModal,
     }
 });
 
@@ -463,7 +527,6 @@ function selectGame(name){
     let title = ".class-" + name;
     let games = JSON.parse(localStorage.getItem("games"));
     const game = games.filter((game) => { return game.name === name; });
-    game[0].selected=true;
     $(id).css({
         "transform": "translateY(4px)",
         "box-shadow": "0 3px black",
@@ -486,6 +549,13 @@ function selectGame(name){
             }
         });
     }
+
+    if(name==="Custom" && !game[0].selected) {
+        $('#custom_modal').modal('toggle')
+
+    }
+
+    game[0].selected=true;
     localStorage.setItem("games", JSON.stringify(games));
 }
 
@@ -579,6 +649,8 @@ $(document).ready(function (){
             }
         }
     });
+
+
 
 })
 
