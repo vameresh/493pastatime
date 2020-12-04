@@ -270,6 +270,7 @@ footer {
     border-radius: 25px;
     box-shadow: 0 7px black;
     margin-bottom: 20px;
+    cursor:pointer
 }
 
 .game-grid{
