@@ -1,5 +1,9 @@
 var settings_open = false;
 var work_time = 0;
+var alarm = new Audio("sounds/alert.mp3");
+
+
+
 
 let tomatoSetup = {
     template:`
@@ -234,14 +238,14 @@ let tomatoTimer = {
             }
         },
         done(){
-            // TODO sound
+            alarm.play();
             this.restart();
             $("#done-buttons").css("display", "block");
             if(this.type==="break"){
                 $("#game-frame").css("opacity", "20%");
-                if(!document.hasFocus()){
-                    alert("Times Up!")
-                }
+            }
+            if(!document.hasFocus()){
+                alert("Times Up!")
             }
         },
         home(){
@@ -472,6 +476,9 @@ let customModal = {
             if(this.link === ""){
                 return;
             }
+            if(!this.link.includes("http")){
+                this.link = "https://" + this.link;
+            }
             games = JSON.parse(localStorage.getItem("games"));
             games[6]["src"] = this.link;
             localStorage.setItem("games", JSON.stringify(games));
@@ -578,6 +585,7 @@ function deselectGame(name){
 
 $(document).ready(function (){
 
+
     //localStorage.setItem("gameset", "false");
     let games = JSON.parse(localStorage.getItem("games"));
     games.forEach(game => {
@@ -650,7 +658,6 @@ $(document).ready(function (){
             }
         }
     });
-
 
 
 })
