@@ -12,13 +12,13 @@ Set times and breaks
 ![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/splash_select.PNG?raw=true)
 
 Set custom breaks
-![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/index_game_custom.PNG?raw=true)
+![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/index_game_custom.png?raw=true)
 
 Work timer counts down
-![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/work.PNG?raw=true)
+![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/work.png?raw=true)
 
 Break timer counts down
-![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/break.PNG?raw=true)
+![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/break.png?raw=true)
 
 Change settings anytime
-![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/settings_panel.PNG?raw=true)
+![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/settings_panel.png?raw=true)
