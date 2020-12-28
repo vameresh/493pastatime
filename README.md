@@ -21,4 +21,5 @@ Break timer counts down
 ![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/break.png?raw=true)
 
 Change settings anytime
+
 ![alt text](https://github.com/vameresh/493pastatime/blob/main/pictures/settings_panel.png?raw=true)
